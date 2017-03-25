@@ -46,6 +46,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
+                        @yield('navbarItems')
                     </ul>
 
                     <!-- Right Side Of Navbar -->
