@@ -81,6 +81,7 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
+                <a href="{{ url('/getTest',5) }}">get Test</a>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>

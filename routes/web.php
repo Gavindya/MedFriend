@@ -41,7 +41,56 @@ Route::patch('/uploadFile', [
     'as' => 'uploadFile'
 ]);
 
+//doctors
 Route::get('/doctorHome', [
     'uses' => 'DoctorController@doctorHome',
     'as' => 'doctorHome'
 ]);
+
+Route::get('/getSelectedPatient', [
+    'uses' => 'DoctorController@getSelectedPatient',
+    'as'=>'getSelectedPatient'
+]);
+//-----------TEST ANG2----------
+Route::get('/test', [
+    'uses' => 'DoctorController@test',
+    'as'=>'test'
+]);
+
+Route::post('/getLoginData', [
+    'uses' => 'Auth\LoginController@getLoginData',
+    'as'=>'getLoginData'
+]);
+
+Route::get('/getAllergies/{id}', [
+    'uses' => 'PatientController@getAllergies',
+    'as'=>'getAllergies'
+]);
+
+Route::post('/setAllergy', [
+    'uses' => 'PatientController@setAllergy',
+    'as'=>'setAllergy'
+]);
+
+Route::get('/getMedicineInfo/{id}', [
+    'uses' => 'PatientController@getMedicineInfo',
+    'as'=>'getMedicineInfo'
+]);
+
+Route::post('/setMedicineInfo', [
+    'uses' => 'PatientController@setMedicineInfo',
+    'as'=>'setMedicineInfo'
+]);
+
+Route::get('/getFamilyMembers/{id}', [
+    'uses' => 'PatientController@getFamilyMembers',
+    'as'=>'getFamilyMembers'
+]);
+
+Route::post('/setFamilyMember', [
+    'uses' => 'PatientController@setFamilyMember',
+    'as'=>'setFamilyMember'
+]);
+
+
+//------------------

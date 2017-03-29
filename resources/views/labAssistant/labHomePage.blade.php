@@ -18,6 +18,39 @@
                     }
                 });
             });
+
+            $("#searchResults").on("click", 'li', function(){
+                $value = this.id;
+                $name =$(this).text();
+                $.ajax({
+                    type : 'GET',
+                    url : '{{URL::to('getSelectedPatient')}}',
+                    data:{$value},
+                    success:function(data) {
+                        $('#searchInput').val($name);
+                        $('#selectedPatient').addClass('selectedMember').html(data);
+//                    $('#btnInfo').removeClass('hidden');
+                        $('#searchResults').fadeOut();
+                    }
+                });
+            });
+
+            $(".patient").on("click", function(){
+                $value = this.id;
+                $name =$(this).find('.nameOfMem').text();
+//                alert($name);
+                $.ajax({
+                    type : 'GET',
+                    url : '{{URL::to('getSelectedPatient')}}',
+                    data:{$value},
+                    success:function(data) {
+                        $('#searchInput').val($name);
+                        $('#selectedPatient').addClass('selectedPatient').html(data);
+                        $('#searchResults').fadeOut();
+                    }
+                });
+            });
+
         });
     </script>
 

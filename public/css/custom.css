@@ -50,3 +50,7 @@
     border-color: #2380dd #2179d5 #1a60aa;
     background-color: #338cdf;
 }
+
+.selectedPatient{
+    background-color: rgba(205, 255, 203, 0.94);
+}

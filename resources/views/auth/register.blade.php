@@ -2,7 +2,7 @@
 
 @section('head')
     <script type="text/javascript">
-        jQuery(document).ready(function ($) {
+//        jQuery(document).ready(function ($) {
 //            $("#role_id").on("change", function() {
 //               if($('#role_id :selected').text()=="DOCTOR"){
 //                   $('#specField').removeClass("hidden");
@@ -14,7 +14,7 @@
 //                   $('#specField').addClass("hidden");
 //               }
 //            });
-        });
+//        });
     </script>
 @endsection
 
@@ -40,6 +40,20 @@
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="middle_name" class="col-md-4 control-label">Middle Name</label>
+                            <div class="col-md-6">
+                                <input id="middle_name" type="text" class="form-control" name="middle_name" value="{{ old('middle_name') }}" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_name" class="col-md-4 control-label">Last Name</label>
+                            <div class="col-md-6">
+                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" autofocus>
                             </div>
                         </div>
 
@@ -86,7 +100,7 @@
                         {{--<div id="regNum" class="hidden form-group">--}}
                             {{--<label for="regNumber" class="col-md-4 control-label">Registration Number</label>--}}
                             {{--<div class="col-md-6">--}}
-                                {{--<input id="regNumber" type="text" class="form-control" name="regNumber" required>--}}
+                                {{--<input id="regNumber" type="text" class="form-control" name="regNumber" >--}}
                             {{--</div>--}}
                         {{--</div>--}}
 
