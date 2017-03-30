@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\allergy;
 use App\family;
+use App\patient;
 use App\medicineInfo;
+use App\User;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -94,9 +96,27 @@ class PatientController extends Controller
                     'mem_mobile' => $mem->family_member->mobile);
                 array_push($data,$details);
             }
-            echo json_encode($family_members);
+            echo json_encode($data);
         }else{
             return response('not authenticated', 404);
         }
+    }
+
+    public function mobileSearchPatients($name){
+//        $family_members= family::all()->where('name','like', '%' . $name . '%');
+//        $family_members= User::all()->where('role_id',2)->where('name','LIKE',"%{$name}%");
+        $family_members= User::all()->where('role_id',2);
+
+        $dataArray = array();
+        foreach ($family_members as $mem){
+            if( (strpos( $mem->name, $name ) !== false) or
+                (strpos( $mem->middle_name, $name ) !== false) or
+                (strpos( $mem->last_name, $name ) !== false)){
+                $details = array('mem_id'=>$mem->id,'mem_first_name' =>$mem->name,'mem_middle_name' => $mem->middle_name,
+                    'mem_last_name' => $mem->last_name);
+                array_push($dataArray,$details);
+            }
+        }
+        echo json_encode($dataArray);
     }
 }

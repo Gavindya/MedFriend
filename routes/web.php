@@ -92,5 +92,10 @@ Route::post('/setFamilyMember', [
     'as'=>'setFamilyMember'
 ]);
 
+Route::get('/mobileSearchPatients/{name}', [
+    'uses' => 'PatientController@mobileSearchPatients',
+    'as'=>'mobileSearchPatients'
+]);
+
 
 //------------------
