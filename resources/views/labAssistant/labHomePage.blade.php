@@ -7,16 +7,20 @@
             $('#searchResults').hide();
             $('#searchInput').on('keyup', function () {
                 $value = $(this).val();
+                if($value!=""){
 //                alert($value);
-                $.ajax({
-                    type: 'GET',
-                    url: '{{url('/searchPatients')}}',
-                    data: {$value},
-                    success: function (data) {
-                        $('#searchResults').show();
-                        $('#searchResults').html(data);
-                    }
-                });
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{url('/searchPatients')}}',
+                        data: {$value},
+                        success: function (data) {
+                            $('#searchResults').show();
+                            $('#searchResults').html(data);
+                        }
+                    });
+                }else{
+                    $('#searchResults').hide();
+                }
             });
 
             $("#searchResults").on("click", 'li', function(){

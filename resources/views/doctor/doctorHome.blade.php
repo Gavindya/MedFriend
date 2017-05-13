@@ -10,16 +10,20 @@
             $('#searchResults').hide();
             $('#searchInput').on('keyup', function () {
                 $value = $(this).val();
+                if($value!=""){
 //                alert($value);
-                $.ajax({
-                    type: 'GET',
-                    url: '{{url('/searchPatients')}}',
-                    data: {$value},
-                    success: function (data) {
-                        $('#searchResults').show();
-                        $('#searchResults').html(data);
-                    }
-                });
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{url('/doc_searchPatients')}}',
+                        data: {$value},
+                        success: function (data) {
+                            $('#searchResults').show();
+                            $('#searchResults').html(data);
+                        }
+                    });
+                }else {
+                    $('#searchResults').hide();
+                }
             });
 
 
@@ -70,14 +74,12 @@
                     <div class="panel-heading">
                         Search Patient
                     </div>
-
                     <div class="panel-body">
                         @include('patientSearch.searchTextBox')
                     </div>
                 </div>
             </div>
         </div>
-
         @include('patientSearch.patientDetails')
 <br/>
         @if($active!=null)
@@ -87,14 +89,26 @@
                     <div class="panel-heading">
                         Active Patients
                     </div>
-
                     <div class="panel-body">
                         @include('doctor.activePatients')
-
                     </div>
                 </div>
             </div>
         </div>
+        @endif
+        @if($waiting!=null)
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-info alert-info">
+                        <div class="panel-heading">
+                            Waiting Patients
+                        </div>
+                        <div class="panel-body">
+                            @include('doctor.waitingPatients')
+                        </div>
+                    </div>
+                </div>
+            </div>
         @endif
         @if($expired!=null)
             <div class="row">
@@ -103,7 +117,6 @@
                         <div class="panel-heading">
                             Expired Patients
                         </div>
-
                         <div class="panel-body">
                             @include('doctor.expiredPatients')
                         </div>

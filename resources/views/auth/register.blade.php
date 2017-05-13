@@ -2,19 +2,19 @@
 
 @section('head')
     <script type="text/javascript">
-//        jQuery(document).ready(function ($) {
-//            $("#role_id").on("change", function() {
-//               if($('#role_id :selected').text()=="DOCTOR"){
-//                   $('#specField').removeClass("hidden");
-//                   $('#regNum').removeClass("hidden");
-//               }else{
-//                   $('#regNum').val(0);
-//                   $('#specField').val(0);
-//                   $('#regNum').addClass("hidden");
-//                   $('#specField').addClass("hidden");
-//               }
-//            });
-//        });
+        jQuery(document).ready(function ($) {
+            $("#role_id").on("change", function() {
+               if($('#role_id :selected').text()=="DOCTOR"){
+                   $('#specField').removeClass("hidden");
+                   $('#regNum').removeClass("hidden");
+               }else{
+                   $('#regNum').val(0);
+                   $('#specField').val(0);
+                   $('#regNum').addClass("hidden");
+                   $('#specField').addClass("hidden");
+               }
+            });
+        });
     </script>
 @endsection
 
@@ -78,31 +78,35 @@
                             <div class="col-md-6">
                                 <select id="role_id" name="role_id" class="form-control" >
                                     <option selected>--Select--</option>
-                                    @foreach($roles as $role)
-                                        <option value={{$role['id']}}>{{$role['role']}}</option>
+                                    {{--HARD CODED VALUES CUS PATIENTS DOESNT NEED TO LOG IN FROM HERE--}}
+                                    <option value=1>ADMIN</option>
+                                    <option value=3>DOCTOR</option>
+                                    <option value=4>LAB ASSISTANT</option>
+                                    {{--@foreach($roles as $role)--}}
+                                        {{--<option value={{$role['id']}}>{{$role['role']}}</option>--}}
+                                    {{--@endforeach--}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="specField" class="hidden form-group">
+                            <label for="field_id" class="col-md-4 control-label">Specialization </label>
+                            <div class="col-md-6">
+                                <select id="field_id" name="field_id" class="form-control" >
+                                    <option selected>--Select--</option>
+                                    @foreach($fields as $field)
+                                        <option value={{$field['id']}}>{{$field['field']}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        {{--<div id="specField" class="hidden form-group">--}}
-                            {{--<label for="field_id" class="col-md-4 control-label">Specialization </label>--}}
-                            {{--<div class="col-md-6">--}}
-                                {{--<select id="field_id" name="field_id" class="form-control" >--}}
-                                    {{--<option selected>--Select--</option>--}}
-                                    {{--@foreach($fields as $field)--}}
-                                        {{--<option value={{$field['id']}}>{{$field['field']}}</option>--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                        {{--<div id="regNum" class="hidden form-group">--}}
-                            {{--<label for="regNumber" class="col-md-4 control-label">Registration Number</label>--}}
-                            {{--<div class="col-md-6">--}}
-                                {{--<input id="regNumber" type="text" class="form-control" name="regNumber" >--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <div id="regNum" class="hidden form-group">
+                            <label for="regNumber" class="col-md-4 control-label">Registration Number</label>
+                            <div class="col-md-6">
+                                <input id="regNumber" type="text" class="form-control" name="regNumber" >
+                            </div>
+                        </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>

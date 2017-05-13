@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class family extends Model
 {
+//    protected $table = 'families';
     protected $fillable = [
         'patient_ID','family_id',
     ];

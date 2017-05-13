@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\LabController;
 use Illuminate\Database\Eloquent\Model;
 
 class allergy extends Model
@@ -10,4 +11,8 @@ class allergy extends Model
         'patient_ID','medicine', 'allergy',
     ];
 
+//    public function something(){
+//        $lb = new LabController();
+////        $r = $lb->someVal;
+//    }
 }

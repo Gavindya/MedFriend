@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class permission extends Model
 {
-    public function patient(){
+    protected $fillable = [
+        'doctor_ID','patient_ID','field_ID','request',
+        'status',
+    ];
 
+    public function patient(){
         return $this->belongsTo('App\patient','patient_ID','patient_id');
     }
     public function doctor(){

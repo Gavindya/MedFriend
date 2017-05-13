@@ -42,6 +42,12 @@ Route::patch('/uploadFile', [
 ]);
 
 //doctors
+
+Route::get('/doc_searchPatients', [
+    'uses' => 'DoctorController@doc_searchPatients',
+    'as'=>'doc_searchPatients'
+]);
+
 Route::get('/doctorHome', [
     'uses' => 'DoctorController@doctorHome',
     'as' => 'doctorHome'
@@ -51,6 +57,42 @@ Route::get('/getSelectedPatient', [
     'uses' => 'DoctorController@getSelectedPatient',
     'as'=>'getSelectedPatient'
 ]);
+
+Route::get('/viewPatient/{id}', [
+    'uses' => 'DoctorController@viewPatient',
+    'as'=>'viewPatient'
+]);
+
+Route::patch('/viewReport', [
+    'uses' => 'DoctorController@viewReport',
+    'as'=>'viewReport'
+]);
+
+Route::get('/view/{user}/{field}/{file}', [
+    'uses' => 'DoctorController@view',
+    'as'=>'view'
+]);
+
+Route::get('/listOutRecords/{patient_id}/{specialization_field_id}', [
+    'uses' => 'DoctorController@listOutRecords',
+    'as'=>'listOutRecords'
+]);
+
+Route::get('/askPermissionPage/{doctor_id}', [
+    'uses' => 'DoctorController@askPermissionPage',
+    'as'=>'askPermissionPage'
+]);
+
+Route::get('/askPermission/{doctor_id}/{patient_id}/{requesting_field_id}', [
+    'uses' => 'DoctorController@askPermission',
+    'as'=>'askPermission'
+]);
+
+Route::patch('/addNotes', [
+    'uses' => 'DoctorController@addNotes',
+    'as'=>'addNotes'
+]);
+
 //-----------TEST ANG2----------
 Route::get('/test', [
     'uses' => 'DoctorController@test',
@@ -87,15 +129,66 @@ Route::get('/getFamilyMembers/{id}', [
     'as'=>'getFamilyMembers'
 ]);
 
-Route::post('/setFamilyMember', [
+Route::get('/setFamilyMember/{user_id}/{member_id}', [
     'uses' => 'PatientController@setFamilyMember',
     'as'=>'setFamilyMember'
 ]);
 
-Route::get('/mobileSearchPatients/{name}', [
+Route::get('/deleteFamilyMember/{user_id}/{member_id}', [
+    'uses' => 'PatientController@deleteFamilyMember',
+    'as'=>'deleteFamilyMember'
+]);
+
+Route::get('/mobileSearchPatients/{user_id}/{name}', [
     'uses' => 'PatientController@mobileSearchPatients',
     'as'=>'mobileSearchPatients'
 ]);
+
+Route::get('/getProfileDetails/{id}', [
+    'uses' => 'PatientController@getProfileDetails',
+    'as'=>'getProfileDetails'
+]);
+
+Route::post('/setProfileDetails', [
+    'uses' => 'PatientController@setProfileDetails',
+    'as'=>'setProfileDetails'
+]);
+
+Route::get('/mobileSearchDoctors/{name}', [
+    'uses' => 'PatientController@mobileSearchDoctors',
+    'as'=>'mobileSearchDoctors'
+]);
+
+Route::post('/registerPatient', [
+    'uses' => 'PatientController@registerPatient',
+    'as'=>'registerPatient'
+]);
+
+Route::get('/getReportsList/{id}/{field}', [
+    'uses' => 'PatientController@getReportsList',
+    'as'=>'getReportsList'
+]);
+
+Route::get('/getReport/{patient_id}/{field_id}/{file_name}', [
+    'uses' => 'PatientController@getReport',
+    'as'=>'getReport'
+]);
+
+Route::get('/getInitNotifications/{patient_id}', [
+    'uses' => 'PatientController@getInitNotifications',
+    'as'=>'getInitNotifications'
+]);
+
+Route::get('/rejectPermission/{permission_id}', [
+    'uses' => 'PatientController@rejectPermission',
+    'as'=>'rejectPermission'
+]);
+
+Route::get('/acceptPermission/{permission_id}', [
+    'uses' => 'PatientController@acceptPermission',
+    'as'=>'acceptPermission'
+]);
+
 
 
 //------------------

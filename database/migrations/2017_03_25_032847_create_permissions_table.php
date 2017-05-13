@@ -20,11 +20,13 @@ class CreatePermissionsTable extends Migration
             $table->increments('id');
             $table->integer('doctor_ID');
             $table->integer('patient_ID');
+            $table->integer('field_ID');
             $table->string('request');
             $table->timestamps();
             $table->tinyInteger('status')->default('0');
             $table->foreign('doctor_ID')->references('doctor_id')->on('doctors');
             $table->foreign('patient_ID')->references('patient_id')->on('patients');
+            $table->foreign('field_ID')->references('id')->on('specializations');
         });
     }
 
