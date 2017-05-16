@@ -81,43 +81,6 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
-                {{--deleteFamilyMember($user_id,$member_id)--}}
-                <a href="{{ route('getFamilyMemRequests',['user_id'=>4]) }}">fam req</a>
-
-                <form method="post" action="{{route('setBloodDonated')}}" enctype="multipart/form-data" >
-                    {{method_field('POST')}}
-                    {{csrf_field()}}
-                    <div class="row">
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label for="donated">Date</label>
-                                <input type="date" name="donated" id="donated" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-12">
-                                <label for="userid">ID</label>
-                                <input type="number" name="userid" id="userid" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group">
-                            <button class="btn-primary form-control" type="submit">Update</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group">
-                            <button class="btn-primary form-control" type="reset" value="Reset">Reset</button>
-                        </div>
-                    </div>
-                </form>
-
-
-
-
-
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
