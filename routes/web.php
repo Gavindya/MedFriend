@@ -134,6 +134,22 @@ Route::get('/setFamilyMember/{user_id}/{member_id}', [
     'as'=>'setFamilyMember'
 ]);
 
+Route::get('/getFamilyMemRequests/{user_id}', [
+    'uses' => 'PatientController@getFamilyMemRequests',
+    'as'=>'getFamilyMemRequests'
+]);
+
+Route::get('/acceptFamilyMember/{req_id}/{user_id}', [
+    'uses' => 'PatientController@acceptFamilyMember',
+    'as'=>'acceptFamilyMember'
+]);
+
+Route::get('/discardFamilyMember/{req_id}/{user_id}', [
+    'uses' => 'PatientController@discardFamilyMember',
+    'as'=>'discardFamilyMember'
+]);
+
+
 Route::get('/deleteFamilyMember/{user_id}/{member_id}', [
     'uses' => 'PatientController@deleteFamilyMember',
     'as'=>'deleteFamilyMember'
@@ -157,6 +173,11 @@ Route::post('/setProfileDetails', [
 Route::get('/mobileSearchDoctors/{name}', [
     'uses' => 'PatientController@mobileSearchDoctors',
     'as'=>'mobileSearchDoctors'
+]);
+
+Route::get('/getActiveDoctors/{patient_id}', [
+    'uses' => 'PatientController@getActiveDoctors',
+    'as'=>'getActiveDoctors'
 ]);
 
 Route::post('/registerPatient', [
@@ -189,6 +210,25 @@ Route::get('/acceptPermission/{permission_id}', [
     'as'=>'acceptPermission'
 ]);
 
+Route::get('/getLastBloodDonated/{id}', [
+    'uses' => 'PatientController@getLastBloodDonated',
+    'as'=>'getLastBloodDonated'
+]);
+
+Route::post('/setBloodDonated', [
+    'uses' => 'PatientController@setBloodDonated',
+    'as'=>'setBloodDonated'
+]);
+
+Route::post('/patientUpload', [
+    'uses' => 'PatientController@patientUpload',
+    'as'=>'patientUpload'
+]);
+
+Route::get('/discardPermission/{permission_id}/{patient_id}', [
+    'uses' => 'PatientController@discardPermission',
+    'as'=>'discardPermission'
+]);
 
 
 //------------------

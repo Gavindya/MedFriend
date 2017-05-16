@@ -9,13 +9,14 @@
 
             $('#searchResults').hide();
             $('#searchInput').on('keyup', function () {
-                $value = $(this).val();
-                if($value!=""){
-//                alert($value);
+                value = $(this).val();
+                if(value!=""){
+//                alert(value);
                     $.ajax({
                         type: 'GET',
-                        url: '{{url('/doc_searchPatients')}}',
-                        data: {$value},
+                        {{--url: '{{url('/doc_searchPatients')}}',--}}
+                        url: '{{route('doc_searchPatients')}}',
+                        data: {value},
                         success: function (data) {
                             $('#searchResults').show();
                             $('#searchResults').html(data);

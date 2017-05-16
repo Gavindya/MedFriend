@@ -19,42 +19,69 @@ use Session;
 class DoctorController extends Controller
 {
     public function doctorHome(){
-        //EVERY TIME LOADING HOME CHECK FOR NOTIFICATIONS OF ACCEPTED REQUESTS
-
         //redirect to home page of doctor giving recent associated data with the patients
         $doctor_id = Auth::user()->id;
         //waiting - patients for permission to view records
         $waiting= permission::all()->where('doctor_ID',$doctor_id)->where('status',0)->sortByDesc('updated_at');
         //active - currently has permission
         $activePatients= permission::all()->where('doctor_ID',$doctor_id)->where('status',1)->sortByDesc('updated_at');
-//        echo dd($activePatients[0]->patient->user->name);
-        
+
+        foreach ($activePatients as $permission){
+            $updated = $permission->updated_at->diffForHumans();
+            $timeArray = explode(' ',$updated);
+            echo var_dump($timeArray[1]);
+            if($timeArray[1]=="day"||$timeArray[1]=="days"
+                ||$timeArray[1]=="week"||$timeArray[1]=="weeks"
+                ||$timeArray[1]=="month"||$timeArray[1]=="months"
+                ||$timeArray[1]=="year"||$timeArray[1]=="years"){
+                $permission_id = $permission->id;
+                $perm = new permission();
+                $perm->id = $permission_id;
+                $perm->exists=true;
+                $perm->status=2;
+                $perm->save();
+            }
+        }
+        $active= permission::all()->where('doctor_ID',$doctor_id)->where('status',1)->sortByDesc('updated_at');
         //expired- permission timed out
         $expiredPatients= permission::all()->where('doctor_ID',$doctor_id)->where('status',2)->sortByDesc('updated_at');
 
         return view('doctor.doctorHome',
             [
                 'waiting'=>$waiting,
-                'active'=>$activePatients,
+                'active'=>$active,
                 'expired'=>$expiredPatients
             ]);
     }
 
 
     public function doc_searchPatients(Request $request){
-        $keyword = $request->all()['$value'];  //ajax request sent with parameter $value which contains the string to be searched
+        $name = $request->all()['value'];  //ajax request sent with parameter $value which contains the string to be searched
         if ($request->ajax()){
             $output = "";
-            $patients = User::all()->where('role_id',2);
-            if($patients)
-            {
-                foreach ($patients as $patient)
-                {
-                    $output.='<li'.'><a href="viewPatient/'.$patient->id.'">'.$patient->name.'</a></li>';
+            $patients = patient::all();
+            $matchingPatients = array();
+            foreach ($patients as $mem){
+                if(strpos( $mem->user->name, $name ) !==false ){
+                    echo "in arr";
+                    $details = array('id'=>$mem->patient_id,'name' =>$mem->user->name,
+                        'middle_name' => $mem->user->middle_name,
+                        'last_name' =>  $mem->user->last_name);
+                    array_push($matchingPatients,$details);
                 }
-                return Response($output);
             }
 
+            if(sizeof($matchingPatients)!=0)
+            {
+                echo var_dump($matchingPatients);
+                foreach ($matchingPatients as $matchingPatient)
+                {
+                    echo var_dump($matchingPatient);
+//                    $output.='<li'.'><a href="viewPatient/'.$matchingPatient->id.'">'
+//                        .$matchingPatient->name.'</a></li>';
+                }
+//                return Response($output);
+            }
         }
     }
 
@@ -238,7 +265,6 @@ class DoctorController extends Controller
         return redirect()->back();
     }
 
-    
     //TEST FOR MOBILE APP
     public function test(){
         header("Access-Control-Allow-Origin: *");
@@ -252,6 +278,7 @@ class DoctorController extends Controller
 
         echo json_encode($data);
     }
+
 
 
 }
